@@ -1,8 +1,11 @@
 package data;
 
 
-// erstat konstanterne nedenfor
-
+/**
+ * 
+ * @author Grp22
+ * Holds information about the desired server, etc.
+ */
 public abstract class Constant
 {
 	public static final String

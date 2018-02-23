@@ -1,7 +1,12 @@
 package data;
 import java.util.List;
 
-
+/**
+ * 
+ * @author Grp22
+ * interface for all Data access objects, that is
+ * you can create a UserDBDAO class using this interface
+ */
 public interface IUserDAO {
 
 	UserDTO getUser(int userId) throws DALException;

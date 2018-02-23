@@ -11,26 +11,15 @@ import java.sql.Statement;
 import data.IUserDAO.DALException;
 
 
-
+/**
+ * 
+ * @author Grp22
+ * 
+ */
 public class Connector
 {
 	/**
-	 * To connect to a MySQL-server
-	 * 
-	 * @param url must have the form
-	 * "jdbc:mysql://<server>/<database>" for default port (3306)
-	 * OR
-	 * "jdbc:mysql://<server>:<port>/<database>" for specific port
-	 * more formally "jdbc:subprotocol:subname"
-	 * 
-	 * @throws ClassNotFoundException 
-	 * @throws IllegalAccessException 
-	 * @throws InstantiationException 
-	 * @throws SQLException 
-	 */
-	
-	/**
-	 * Connects to a given database, on a Mysql object called Connection, that is, the return type is of "Connection"
+	 * Connects to a given database, on a MySQL object called Connection, that is, the return type is of "Connection"
 	 */
 	public static Connection connectToDatabase(String url, String username, String password)
 			throws InstantiationException, IllegalAccessException,
@@ -48,8 +37,8 @@ public class Connector
 	private static Statement stm;
 	
 	/**
-	 * Tries to connect to a given database. if so desired, 
-	 * otherwize called by the no arguments constructor. (in this class file)
+	 * Tries to connect to a given database. if so desired. 
+	 * also automatically called by constructor Connector() with pre-given information defined in Constant
 	 * @param server - ex. localhost
 	 * @param port - ex 3306
 	 * @param database - ex localDBGrp22
@@ -61,14 +50,7 @@ public class Connector
 				throws InstantiationException, IllegalAccessException,
 					ClassNotFoundException, SQLException
 	{	
-		System.out.println("Before executeScpDB() method");
-//		SQLReader st = new SQLReader();
-//		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/?user=root&password=");
-//		Statement s = conn.createStatement();
-//		st.tester(s);
-		
-		executeScpDB("../database_create.sql"); //calls function that automatically creates a database and two users
-		//a bit redundant in terms of code optimization. but due to current code structure, doing a seperate call
+		executeDB(); //automatically creates a database
 		
 		conn	= connectToDatabase("jdbc:mysql://"+server+":"+port+"/"+database,
 					username, password);
@@ -77,16 +59,12 @@ public class Connector
 	}
 	
 	/**
-	 * Executes a Sql script.
+	 * Executes Sql statements to create a database in case user doesn't have one already.
 	 */
-	public void executeScpDB(String scriptFilePath) throws SQLException
+	public void executeDB() throws SQLException
 	{
-		System.out.println("Executing script");
-		//in our case, a database creation and user creation so the db isn't empty.
 		try 
 		{
-			
-
 			Connection conn = DriverManager.getConnection("jdbc:mysql://" + Constant.server + "/?user=" + Constant.username + "&password=" + Constant.password);
 			Statement s = conn.createStatement();
 			s.executeUpdate("CREATE DATABASE IF NOT EXISTS cdio_2Semester;");
@@ -100,14 +78,11 @@ public class Connector
 					"        passwd varchar(64),\n" + 
 					"        PRIMARY KEY (userID)\n" + 
 					"                        );");
-//			s.executeUpdate("INSERT INTO personer(userName, ini, roles, cpr, passwd) VALUES\n" + 
-//					"('test', 'tst', 'admin', '123456-8888', 'secure');");
 			conn.close();
 		}
 		catch (Exception e) {
-			System.err.println("Failed to Execute" + scriptFilePath +". The error is"+ e.getMessage());
+			System.err.println("Failed to Execute");
 		} 
-		System.out.println("Succesfully executed script");
 	}
 	
 	/**

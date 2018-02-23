@@ -4,6 +4,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 
+ * @author Grp22
+ * Data access object for a user in a given system.
+ * Holds getters and setters for various data fields
+ */
 public class UserDTO implements Serializable{
 
 	private static final long serialVersionUID = 4545864587995944260L;

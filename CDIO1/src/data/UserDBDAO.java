@@ -6,8 +6,17 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * 
+ * @author Grp22
+ * Database access object
+ * Handles database access
+ */
 public class UserDBDAO implements IUserDAO{
 
+	/**
+	 * gets user information and saves in a UserDTO objekt and transfered back to method call.
+	 */
 	@Override
 	public UserDTO getUser(int userId) throws DALException {		
 		ResultSet rs = Connector.doQuery("SELECT * FROM personer WHERE userID = " + userId);
@@ -22,6 +31,9 @@ public class UserDBDAO implements IUserDAO{
 	    catch (SQLException e) {throw new DALException(e.getMessage(), e); }
 	}
 
+	/**
+	 * gets user information from all database rows and puts into a list of UserDTO objekts and returns to method caller.
+	 */
 	@Override
 	public List<UserDTO> getUserList() throws DALException {
 		// TODO Auto-generated method stub
@@ -38,6 +50,9 @@ public class UserDBDAO implements IUserDAO{
 		return list;
 	}
 
+	/**
+	 * takes a UserDTO objekt and saved a new user with the objects information into the database.
+	 */
 	@Override
 	public void createUser(UserDTO user) throws DALException {
 		// TODO Auto-generated method stub
@@ -54,6 +69,9 @@ public class UserDBDAO implements IUserDAO{
 		
 	}
 
+	/**
+	 * Takes a UserDTO object and updates an already existing database row with the objects information
+	 */
 	@Override
 	public void updateUser(UserDTO user) throws DALException {
 		// TODO Auto-generated method stub
@@ -65,6 +83,9 @@ public class UserDBDAO implements IUserDAO{
 				);
 	}
 
+	/**
+	 * deletes a row in the database with a given userId.
+	 */
 	@Override
 	public void deleteUser(int userId) throws DALException {
 		// TODO Auto-generated method stub
