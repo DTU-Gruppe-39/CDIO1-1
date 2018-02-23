@@ -55,8 +55,8 @@ public class TUI implements IUI {
 				System.out.println("Indtast dit CPR-nummer: ");
 				String cpr3 = sc.nextLine();
 				f.createUser(userName3, ini3, roles, cpr3);	//Creates a user with the inputted information
+//				f.retrieveUserId();
 //				System.out.println("3");	//Only for test purposes
-				//TODO Display password
 				menuOptions();
 				break;
 			case 4: //Update user.

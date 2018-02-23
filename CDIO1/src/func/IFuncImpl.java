@@ -13,4 +13,5 @@ public interface IFuncImpl {
 	void deleteUser(int userId) throws DALException; //same concept
 	void exit(); //Shuts down program
 	String createPass(int len, String dic);
+	int retrieveUserId() throws DALException;
 }

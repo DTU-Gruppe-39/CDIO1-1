@@ -46,9 +46,12 @@ public class FuncImpl implements IFuncImpl{
 		this.dt.setCpr(cpr);
 		String password = createPass(6, UPPER + LOWER + SPECIAL + NUMERIC);
 		this.dt.setPassword(password);
-		this.d.createUser(this.dt);
+		d.createUser(this.dt);		//Maybe it should be this.d.?
 	}
 
+	public int retrieveUserId() throws DALException {
+		return d.retrieveUserId();
+	}
 	@Override
 	public void updateUser(int userId, String userName, String ini, List<String> roles, String cpr) throws DALException {
 		// Updates the user by getting the user and then set the users attributes to the corresponding parameters.

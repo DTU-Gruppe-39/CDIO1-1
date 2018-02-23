@@ -40,7 +40,7 @@ public class UserDBDAO implements IUserDAO{
 
 	@Override
 	public void createUser(UserDTO user) throws DALException {
-		// TODO Auto-generated method stub
+		System.out.println("Mellem dem");
 		Connector.doUpdate(	//NEEDS TO BE SETUP------------------------------------------------------------------------
 		"INSERT INTO personer(userName, ini, roles, cpr, passwd) VALUES " + 
 		"('" + user.getUserName() + "',"
@@ -50,13 +50,22 @@ public class UserDBDAO implements IUserDAO{
 				+ " '" + user.getCpr() + "',"
 						+ " '" + user.getPassword() + "');"
 		);
-		
-		
 	}
 
+	public int retrieveUserId() throws DALException {
+		ResultSet rs =  Connector.doQuery("SELECT MAX(userID) from personer;");
+		try {
+			System.out.println("jhfsdaf");
+			return rs.getInt("userID");
+		} catch (SQLException e) {
+			System.out.println("FAILED trying to get userID when creating user");
+			e.printStackTrace();
+		}
+		System.out.println(-1);
+		return -1;
+	}
 	@Override
 	public void updateUser(UserDTO user) throws DALException {
-		// TODO Auto-generated method stub
 		Connector.doUpdate(	//NEEDS TO BE SETUP------------------------------------------------------------------------
 				"UPDATE personer SET " + 
 				 "userName = '" + user.getUserName() + "', ini = '" + user.getIni() + "', " + 
@@ -67,7 +76,6 @@ public class UserDBDAO implements IUserDAO{
 
 	@Override
 	public void deleteUser(int userId) throws DALException {
-		// TODO Auto-generated method stub
 		Connector.doUpdate(	//NEEDS TO BE SETUP------------------------------------------------------------------------
 				"DELETE FROM personer WHERE userID = " + userId + ";"
 				);
